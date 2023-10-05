@@ -19,6 +19,7 @@ void menu();
 void mostrarLista(Nodo *);
 void insertarlista(Nodo *&, datosDeJugador);
 void buscarJugador(Nodo *, datosDeJugador);
+void eliminarJugador(Nodo *&, datosDeJugador);
 int main()
 {
    system("cls");
@@ -65,7 +66,7 @@ void mostrarLista(Nodo *Lista)
 }
 void buscarJugador(Nodo *lista, datosDeJugador JugadorR)
 {
-   bool condicion=false;
+   bool condicion = false;
    Nodo *actual = new Nodo();
    actual = lista;
 
@@ -87,12 +88,35 @@ void buscarJugador(Nodo *lista, datosDeJugador JugadorR)
       cout << "\nNo hay nadie participando con ese nombre ";
    }
 }
+void eliminarJugador(Nodo *& Lista,datosDeJugador JugadorX){
+   if(Lista!=nullptr){
+      Nodo *auxBorrar;
+      Nodo *anterior =nullptr;
+      auxBorrar=Lista;
+
+      while((auxBorrar!=nullptr)&&(auxBorrar->jugadorx.nivel!=JugadorX.nivel)&&(auxBorrar->jugadorx.nombre!=JugadorX.nombre)){
+         anterior = auxBorrar;
+         auxBorrar=auxBorrar->siguiete;
+      }
+      if(auxBorrar==nullptr){
+         cout<<"\nNo existe ese jugador ";
+      }
+      else if(anterior==nullptr){
+         Lista=Lista->siguiete;
+         delete auxBorrar;
+      }
+      else{
+         anterior->siguiete=auxBorrar->siguiete;
+         delete auxBorrar;
+      }
+   }
+   cout<<"\nel jugador "<<JugadorX.nombre<<" se elimino";
+}
 void menu()
 {
-
    int opc;
    datosDeJugador Eliuth;
-datosDeJugador missing;
+   datosDeJugador missing;
    do
    {
       system("cls");
@@ -100,7 +124,8 @@ datosDeJugador missing;
       cout << "\n1. Anadir jugadores";
       cout << "\n2. Mostrar participantes";
       cout << "\n3. Buscar Participantes ";
-      cout << "\n4. Salir";
+      cout<<"\n4. Eliminar Jugador ";
+      cout << "\n5. Salir";
       cout << "\nIngrese Opcion";
       cin >> opc;
 
@@ -126,26 +151,35 @@ datosDeJugador missing;
 
       case 2:
          mostrarLista(Lista);
-         system ("pause");
+         system("pause");
          break;
 
       case 3:
-        
-         cout<<"\nNombre del jugador ? ";cin>>missing.nombre;
-         cout<<"\nNivel ? "; cin>>missing.nivel;
-         cout<<"\nPersonaje? " ;cin>>missing.personaje;
-         
-         buscarJugador(Lista,missing);
-         system ("pause");
-         break;
-         
 
+         cout << "\nNombre del jugador ? ";
+         cin >> missing.nombre;
+         cout << "\nNivel ? ";
+         cin >> missing.nivel;
+         cout << "\nPersonaje? ";
+         cin >> missing.personaje;
+
+         buscarJugador(Lista, missing);
+         system("pause");
+         break;
       case 4:
-   cout<<"bai...";
-   break;
+      cout<<"\nA quien quiere borrar? ";cin>>missing.nombre;
+      cout<<"\nQue nivel tiene? ";cin>>missing.nivel;
+      cout<<"\nQue jugador usa? ";cin>>missing.personaje;
+      eliminarJugador(Lista,missing);
+      system("pause");
+      break;
+
+      case 5:
+         cout << "bai...";
+         break;
       default:
          cout << "\nErrooor";
          break;
       }
-   } while (opc != 4);
+   } while (opc != 5);
 }
