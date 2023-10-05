@@ -29,6 +29,8 @@ int main()
       cin >> Eliuth.nombre;
       cout << "\n jugador a usar ";
       cin >> Eliuth.personaje;
+      cout<< "\n que nivel? ";
+      cin>>Eliuth.nivel;
 
       insertarlista(Lista, Eliuth);
 
@@ -47,7 +49,7 @@ void insertarlista(Nodo *&lista, datosDeJugador jugadorY)
    Nodo *aux1 = lista;
    Nodo *aux2;
 
-   while ((aux1 != nullptr) && (aux1->jugadorx.nombre < jugadorY.nombre))
+   while ((aux1 != nullptr) && (aux1->jugadorx.nivel < jugadorY.nivel))
    {
       aux2 = aux1;
       aux1 = aux1->siguiete;
