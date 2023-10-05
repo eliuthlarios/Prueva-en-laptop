@@ -22,13 +22,15 @@ int main (){
    system ("cls");
 Nodo *Lista=nullptr;
 datosDeJugador Eliuth;
-
+char continuar;
+do{
 cout <<"\ninsertar datos del jugador "; cin>>Eliuth.nombre;
 cout<< "\n jugador a usar "; cin>>Eliuth.personaje;
 
 insertarlista(Lista,Eliuth);
 
-
+cout<<"\n desea anadir otro user? s/n "; cin>>continuar;
+}while(continuar =='s');
 
 
 
@@ -44,7 +46,7 @@ void insertarlista(Nodo *& lista, datosDeJugador jugadorY){
 
    while ((aux1 != nullptr)&&(aux1->jugadorx.nombre < jugadorY.nombre)){
       aux2 =aux1;
-      aux2 =aux1->siguiete;
+      aux1 =aux1->siguiete;
    }
 if(lista==aux1){
    lista = nuevoNodo;
