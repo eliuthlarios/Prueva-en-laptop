@@ -14,7 +14,7 @@ struct Nodo
    datosDeJugador jugadorx;
    Nodo *siguiete;
 };
-
+void mostrarLista(Nodo *);
 void insertarlista(Nodo *&, datosDeJugador);
 
 int main()
@@ -29,14 +29,16 @@ int main()
       cin >> Eliuth.nombre;
       cout << "\n jugador a usar ";
       cin >> Eliuth.personaje;
-      cout<< "\n que nivel? ";
-      cin>>Eliuth.nivel;
+      cout << "\n que nivel? ";
+      cin >> Eliuth.nivel;
 
       insertarlista(Lista, Eliuth);
 
       cout << "\n desea anadir otro user? s/n ";
       cin >> continuar;
    } while (continuar == 's');
+
+   mostrarLista(Lista);
 
    return 0;
 }
@@ -66,4 +68,16 @@ void insertarlista(Nodo *&lista, datosDeJugador jugadorY)
    nuevoNodo->siguiete = aux1;
 
    cout << "\n el jugador " << jugadorY.nombre << " con personaje " << jugadorY.personaje << " se agrego correctamente a la lista";
+}
+void mostrarLista(Nodo *Lista)
+{
+   Nodo *actual = new Nodo();
+   actual = Lista;
+
+   while (actual != nullptr)
+   {
+      cout << "\nel jugador " << actual->jugadorx.nombre << " con personaje " << actual->jugadorx.personaje 
+      << " con nivel: " << actual->jugadorx.nivel << endl;
+      actual =actual->siguiete;
+   }
 }
