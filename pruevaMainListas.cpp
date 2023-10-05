@@ -16,7 +16,18 @@ using namespace std;
  };
 
  void insertarlista(Nodo*&, datosDeJugador);
+
+
 int main (){
+   system ("cls");
+Nodo *Lista=nullptr;
+datosDeJugador Eliuth;
+
+cout <<"\ninsertar datos del jugador "; cin>>Eliuth.nombre;
+cout<< "\n jugador a usar "; cin>>Eliuth.personaje;
+
+insertarlista(Lista,Eliuth);
+
 
 
 
@@ -31,7 +42,7 @@ void insertarlista(Nodo *& lista, datosDeJugador jugadorY){
    Nodo *aux1= lista;
    Nodo *aux2;
 
-   while ((aux1 != nullptr)&&(aux1->jugadorx < jugadorY)){
+   while ((aux1 != nullptr)&&(aux1->jugadorx.nombre < jugadorY.nombre)){
       aux2 =aux1;
       aux2 =aux1->siguiete;
    }
@@ -42,5 +53,7 @@ if(lista==aux1){
    aux2->siguiete = nuevoNodo;
 }
 nuevoNodo->siguiete = aux1;
+
+cout<<"\n el jugador "<<jugadorY.nombre <<" con personaje "<<jugadorY.personaje<< " se agrego correctamente a la lista";
 }
  
